@@ -1,0 +1,18 @@
+server {
+    listen 80;
+	listen [::]:80;
+
+    server_name your_domain www.yourdomain;
+    root /var/www/yourdomain;
+
+    index index.html index.htm index.nginx-debian.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+}

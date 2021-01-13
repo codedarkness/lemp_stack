@@ -1,7 +1,7 @@
 server {
     listen 80;
-    server_name mydomain.xyz www.mydomain.xyz;
-    root /var/www/mydomain;
+    server_name mydomain.xxx www.mydomain.xxx;
+    root /var/www/domain;
 
     index index.html index.htm index.php;
 

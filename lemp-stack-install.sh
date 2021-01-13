@@ -43,7 +43,7 @@ install-nginx() {
 	echo ""
 
 	while true; do
-		read -p " Is a Debian Server : " yn
+		read -p " Is a Debian Server [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
 				sudo apt install python-certbot-nginx -y ;;
@@ -55,10 +55,10 @@ install-nginx() {
 	echo ""
 
 	while true; do
-		read -p " Is a Ubuntu Server : " yn
+		read -p " Is a Ubuntu Server [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				sudo apt install python3-certbot-nginx -y ;;
+				sudo apt install python3-certbot-nginx -y; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;
@@ -79,8 +79,8 @@ install-nginx() {
 	sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 	sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
 	sed -i 's/domain/'$choice'/g' configs/$choice &&
-	sudo cp configs/$choice /etc/nginx/sites-avaiable/ &&
-	sudo ln -s /etc/nginx/sites-avaiable/$choice /etc/nginx/sites-enable/ &&
+	sudo cp configs/$choice /etc/nginx/sites-available/ &&
+	sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 	sudo systemctl reload nginx &&
 	echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
 	echo ""
@@ -119,10 +119,10 @@ install-lemp() {
 	echo ""
 
 	while true; do
-		read -p " Is a Debian Server : " yn
+		read -p " Is a Debian Server [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				sudo apt install python-certbot-nginx -y ;;
+				sudo apt install python-certbot-nginx -y; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;
@@ -131,10 +131,10 @@ install-lemp() {
 	echo ""
 
 	while true; do
-		read -p " Is a Ubuntu Server : " yn
+		read -p " Is a Ubuntu Server [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				sudo apt install python3-certbot-nginx -y ;;
+				sudo apt install python3-certbot-nginx -y; break;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;
@@ -155,8 +155,8 @@ install-lemp() {
 	sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 	sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
 	sed -i 's/domain/'$choice'/g' configs/$choice &&
-	sudo cp configs/$choice /etc/nginx/sites-avaiable/ &&
-	sudo ln -s /etc/nginx/sites-avaiable/$choice /etc/nginx/sites-enable/ &&
+	sudo cp configs/$choice /etc/nginx/sites-available/ &&
+	sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 	sudo systemctl reload nginx &&
 	echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
 	echo ""
@@ -164,14 +164,6 @@ install-lemp() {
 	echo " Everything is setup for your new php web site, now if you are in a live server"
 	echo " run certbot for you ssl certificate"
 	echo ""
-}
-
-phpmyadmin-debian() {
-	echo ""
-	echo " PhpMyAdmin For Debian Server"
-	echo ""
-	sleep 2
-
 }
 
 phpmyadmin-ubuntu() {
@@ -217,7 +209,7 @@ run-certbot() {
 	echo ""
 
 	while true; do
-		read -p " Run certbot : " yn
+		read -p " Run certbot [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
 				certbot --nginx ;;
@@ -236,7 +228,7 @@ create-nginx-web() {
 	sleep 2
 
 	while true; do
-		read -p "HTML Website : " yn
+		read -p "HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
 				read -p " Which is the domain name : " choice;
@@ -245,8 +237,8 @@ create-nginx-web() {
 				sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 				sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
 				sed -i 's/domain/'$choice'/g' configs/$choice &&
-				sudo cp configs/$choice /etc/nginx/sites-avaiable/ &&
-				sudo ln -s /etc/nginx/sites-avaiable/$choice /etc/nginx/sites-enable/ &&
+				sudo cp configs/$choice /etc/nginx/sites-available/ &&
+				sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 				sudo systemctl reload nginx &&
 				echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
 				echo "" ;;
@@ -258,7 +250,7 @@ create-nginx-web() {
 	echo ""
 
 	while true; do
-		read -p " PHP/HTML Website : " yn
+		read -p " PHP/HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
 				read -p " Which is the domain name : " choice;
@@ -267,8 +259,8 @@ create-nginx-web() {
 				sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 				sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
 				sed -i 's/domain/'$choice'/g' configs/$choice &&
-				sudo cp configs/$choice /etc/nginx/sites-avaiable/ &&
-				sudo ln -s /etc/nginx/sites-avaiable/$choice /etc/nginx/sites-enable/ &&
+				sudo cp configs/$choice /etc/nginx/sites-available/ &&
+				sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 				sudo systemctl reload nginx &&
 				echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
 				echo "" ;;
@@ -306,11 +298,10 @@ until [ "$selection" = "0" ]; do
 	echo ""
 	echo " 1 - nginx for html only"
 	echo " 2 - Stack (nginx, MySQL, PHP)"
-	echo " 3 - PhpMyAdmin (Debian)"
-	echo " 4 - PhpMyAdmin (Ubunut)"
+	echo " 3 - PhpMyAdmin (for Ubunut only)"
 	echo ""
-	echo " 5 - Run Certbot (SSL Cetificate)"
-	echo " 6 - Create nginx block"
+	echo " 4 - Run Certbot (SSL Cetificate)"
+	echo " 5 - Create nginx block"
 	echo ""
 	echo " 0 - Exit"
 	echo ""
@@ -321,10 +312,9 @@ until [ "$selection" = "0" ]; do
 	case $selection in
 		1) clear; install-nginx     ; press_enter ;;
 		2) clear; install-lemp      ; press_enter ;;
-		3) clear; phpmyadmin-debian ; press_enter ;;
-		4) clear; phpmyadmin-ubunut ; press_enter ;;
-		5) clear; run-certbot       ; press_enter ;;
-		6) clear; create-nginx-web  ; press_enter ;;
+		3) clear; phpmyadmin-ubuntu ; press_enter ;;
+		4) clear; run-certbot       ; press_enter ;;
+		5) clear; create-nginx-web  ; press_enter ;;
 		0) clear; exit ;;
 		*) clear; incorrect_selection ; press_enter ;;
 	esac

@@ -1,6 +1,4 @@
-# Stack Server
+# LEMP Stack
 
-## LAMP Stack
+Instal **LEMP Stack** (Linux - Xginx - MySql - Php)
 
-
-## LEMP Stack

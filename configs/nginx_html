@@ -2,8 +2,8 @@ server {
     listen 80;
 	listen [::]:80;
 
-    server_name your_domain www.yourdomain;
-    root /var/www/yourdomain;
+    server_name domain.xxx www.domain.xxx;
+    root /var/www/domain;
 
     index index.html index.htm index.nginx-debian.html;
 

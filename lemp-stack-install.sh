@@ -46,7 +46,7 @@ install-nginx() {
 		read -p " Is a Debian Server [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				sudo apt install python-certbot-nginx -y ;;
+				sudo apt install python-certbot-nginx -y; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;
@@ -73,7 +73,7 @@ install-nginx() {
 	echo " enable in sites-enabled"
 	echo ""
 
-	read -p " Which is the domain name : " choice;
+	read -p " Which is the domain name (mydomian.xxx) : " choice;
 	sudo mkdir /var/www/$choice &&
 	cp configs/nginx_html configs/$choice &&
 	sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
@@ -183,7 +183,7 @@ phpmyadmin-ubuntu() {
 	echo " re-directed to your server, this is for a VPS or a server with a public ip address"
 	echo ""
 
-	read -p " Which is the sub-domain name : " choice;
+	read -p " Which is the sub-domain name (myadmin.mydomain.xxx) : " choice;
 	cp configs/phpmyadmin configs/phpmyadmin.conf &&
 	sed -i 's/domain.xxx/'$choice'/g' configs/phpmyadmin.conf &&
 	sudo cp configs/phpmyadmin.conf /etc/nginx/conf.d/ &&
@@ -231,7 +231,7 @@ create-nginx-web() {
 		read -p "HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				read -p " Which is the domain name : " choice;
+				read -p " Which is the domain name (mydomain.xxx) : " choice;
 				sudo mkdir /var/www/$choice &&
 				cp configs/nginx_html configs/$choice &&
 				sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
@@ -241,7 +241,7 @@ create-nginx-web() {
 				sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 				sudo systemctl reload nginx &&
 				echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
-				echo "" ;;
+				echo ""; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;
@@ -253,7 +253,7 @@ create-nginx-web() {
 		read -p " PHP/HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				read -p " Which is the domain name : " choice;
+				read -p " Which is the domain name (mydomain.xxx) : " choice;
 				sudo mkdir /var/www/$choice &&
 				cp configs/nginx_php configs/$choice &&
 				sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
@@ -263,7 +263,7 @@ create-nginx-web() {
 				sudo ln -s /etc/nginx/sites-available/$choice /etc/nginx/sites-enabled/ &&
 				sudo systemctl reload nginx &&
 				echo " Everything is setup for new domain $choice" || echo " Huston we have a problem!"
-				echo "" ;;
+				echo ""; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;

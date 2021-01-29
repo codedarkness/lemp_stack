@@ -212,7 +212,7 @@ run-certbot() {
 		read -p " Run certbot [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				certbot --nginx ;;
+				certbot --nginx; break ;;
 			[Nn]* )
 				break ;;
 			* ) echo " Please answer yes or no." ;;

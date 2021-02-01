@@ -73,8 +73,12 @@ install-nginx() {
 	echo " enable in sites-enabled"
 	echo ""
 
-	read -p " Which is the domain name (mydomian.xxx) : " choice;
+	read -p " Directory Name ( /var/www ) : " choice;
 	sudo mkdir /var/www/$choice &&
+	echo " The new website directory $choice has been created" || echo " You did it again!!!"
+	echo ""
+
+	read -p " Which is the domain name ( mydomian.xxx ) : " choice;
 	cp configs/nginx_html configs/$choice &&
 	sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 	sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
@@ -149,8 +153,12 @@ install-lemp() {
 	echo " enable in sites-enabled"
 	echo ""
 
-	read -p " Which is the domain name : " choice;
+	read -p " Directory Name ( /var/www ) : " choice;
 	sudo mkdir /var/www/$choice &&
+	echo " The new website directory $choice has been created" || echo " You did it again!!!"
+	echo ""
+
+	read -p " Which is the domain name : " choice;
 	cp configs/nginx_php configs/$choice &&
 	sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 	sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
@@ -231,8 +239,12 @@ create-nginx-web() {
 		read -p "HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
-				read -p " Which is the domain name (mydomain.xxx) : " choice;
+				read -p " Directory Name ( /var/www ) : " choice;
 				sudo mkdir /var/www/$choice &&
+				echo " The new website directory $choice has been created" || echo " You did it again!!!"
+				echo ""
+
+				read -p " Which is the domain name (mydomain.xxx) : " choice;
 				cp configs/nginx_html configs/$choice &&
 				sed -i 's/domain.xxx/'$choice'/g' configs/$choice &&
 				sed -i 's/www.domain.xxx/www.'$choice'/g' configs/$choice &&
@@ -253,6 +265,11 @@ create-nginx-web() {
 		read -p " PHP/HTML Website [ y - n ] : " yn
 		case $yn in
 			[Yy]* )
+				read -p " Directory Name ( /var/www ) : " choice;
+				sudo mkdir /var/www/$choice &&
+				echo " The new website directory $choice has been created" || echo " You did it again!!!"
+				echo ""
+
 				read -p " Which is the domain name (mydomain.xxx) : " choice;
 				sudo mkdir /var/www/$choice &&
 				cp configs/nginx_php configs/$choice &&
